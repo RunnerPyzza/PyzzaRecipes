@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<scriptChain xmlns="RunnerPyzza"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="RunnerPyzza Launcher.xsd">
+  
+  <program>
+    <main>
+      <name>Clean your Reads</name>
+      <baseCommand>findTRIM -j pin /home/runnerpyzza/basicNGS/pinot_1.fastq,/home/runnerpyzza/basicNGS/pinot_2.fastq</baseCommand>
+      <order>0</order>
+      <canFail>true</canFail>
+    </main>
+  </program>
+
+  <program>
+    <main>
+      <name>Build your Genome</name>
+      <baseCommand>bowtie-build /home/runnerpyzza/basicNGS/chr1.fa chr1</baseCommand>
+      <order>0</order>
+      <canFail>true</canFail>
+    </main>
+  </program>
+
+  <program>
+    <main>
+      <name>Mapping</name>
+      <baseCommand>tophat -r 0 chr1 pin_1.fastq pin_2.fastq</baseCommand>
+      <order>1</order>
+      <canFail>true</canFail>
+    </main>
+  </program>
+  
+</scriptChain>
